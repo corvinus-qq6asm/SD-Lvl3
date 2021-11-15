@@ -9,11 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Resources;
+using System.Windows.Forms.Design;
 
 namespace AkasztoFa
 {
     public partial class Form1 : Form
+
+        
     {
+        
+
         int hiba = 0;
         int jo = 0;
         string szo;
@@ -21,6 +26,10 @@ namespace AkasztoFa
 
         void button1_Click(object sender, EventArgs e)//Lista beolvasása és abból kiválasztunk egy szót
         {
+            button1.BackColor = Color.Green;
+            button1.MouseEnter += Button1_MouseEnter;
+            button1.MouseLeave += Button1_MouseLeave;
+
             OpenFileDialog file = new OpenFileDialog();
             file.InitialDirectory = "C:\\";// File helyének megadása
             file.Filter = "txt files|*.txt";//File kiterjesztése
@@ -66,7 +75,18 @@ namespace AkasztoFa
                 Controls.Add(hely);
             }
             button1.Enabled = false;
-        }     
+        }
+
+        private void Button1_MouseLeave(object sender, EventArgs e)
+        {
+            button1.BackColor = SystemColors.ButtonFace;
+        }
+
+        private void Button1_MouseEnter(object sender, EventArgs e)
+        {
+            button1.BackColor = Color.OrangeRed;
+        }
+
         void Gomb_Click(object sender, EventArgs e)
         {
             Button LenyomottBetu = (Button)sender;
@@ -180,9 +200,22 @@ namespace AkasztoFa
         }  
         private void button2_Click(object sender, EventArgs e)//Új játékot kezdhetünk ezzel a  gombbal
         {
+            button2.MouseEnter += Button2_MouseEnter;
+            button2.MouseLeave += Button2_MouseLeave;
+            button2.BackColor = Color.Green;
             Form1 NewForm = new Form1();
             NewForm.Show();
             this.Dispose(false);
+        }
+
+        private void Button2_MouseLeave(object sender, EventArgs e)
+        {
+            button2.BackColor = SystemColors.ButtonFace;
+        }
+
+        private void Button2_MouseEnter(object sender, EventArgs e)
+        {
+            button2.BackColor = Color.OrangeRed;
         }
     }
 }
